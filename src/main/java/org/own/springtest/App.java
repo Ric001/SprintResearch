@@ -13,7 +13,7 @@ public class App
 {
     public static void main( String[] args ) throws Exception
     {
-        BeanFactory factory = new XmlBeanFactory(new FileInputStream("name"));
-    
+
+        final BeanFactory factory = new XmlBeanFactory(new FileInputStream("src\\main\\java\\org\\own\\springtest\\hello.xml"));
     }
 }
