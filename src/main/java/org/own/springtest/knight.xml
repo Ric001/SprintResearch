@@ -1,14 +1,84 @@
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" 
-    "http://www.springframework.org/dtd/spring-beans.dtd">
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans>
-    <bean id="quest" class="org.own.springtest.HolyGrailQuest"></bean>
-    <bean id="knight" class="org.own.springtest.KnightOfTheRoundTable">
-        <constructor-arg>
-            <value>Artemis</value>
+    <bean id="ciudad" class="org.own.springtest.Ciudad">
+        <property name="name">
+            <value>Buenos Aires</value>
+        </property>
+    </bean>
+
+    <bean id="pais" class="org.own.springtest.Pais" autowire="byType" name="cityBean" singleton="false">
+        <property name="city">
+            <bean id="city" class="org.own.springtest.Ciudad">
+                <property name="name">
+                    <value>La Pampara</value>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="country" class="org.own.springtest.Pais">
+        <property name="city">
+            <ref bean="ciudad" />
+        </property>
+    </bean>
+
+    <bean id="product" class="org.own.springtest.Product" singleton="false">
+        <constructor-arg index="0">
+            <value>Jabon</value>
         </constructor-arg>
-        <property name="quest">
-            <ref bean="quest"/>
+        <constructor-arg index="1">
+            <value>20.10</value>
+        </constructor-arg>
+        <constructor-arg index="2">
+            <value>2.10</value>
+        </constructor-arg>
+
+    </bean>
+
+    <bean id="inventory" class="org.own.springtest.Inventory" singleton="false">
+        <property name="products">
+            <list>
+                <ref bean="product" />
+                <ref bean="product" />
+                <ref bean="product" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="inventorySet" class="org.own.springtest.Inventory" singleton="false">
+        <property name="productSet">
+            <set>
+                <ref bean="product" />
+                <ref bean="product" />
+                <ref bean="product" />
+            </set>
+        </property>
+    </bean>
+
+    <bean id="inventoryMap" class="org.own.springtest.Inventory" singleton="false">
+        <property name="productMap">
+            <map>
+                <entry key="one">
+                    <ref bean="product" />
+                </entry>
+                <entry key="two">
+                    <ref bean="product" />
+                </entry>
+                <entry key="three">
+                    <ref bean="product" />
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="inventoryProps" class="org.own.springtest.Inventory" singleton="false">
+        <property name="productProperties">
+            <props>
+                <prop key="username">root</prop>
+                <prop key="password">root</prop>
+                <prop key="dbname">arch_db</prop>
+            </props>
         </property>
     </bean>
 </beans>
